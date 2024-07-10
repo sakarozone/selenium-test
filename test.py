@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,8 +13,11 @@ defaultWait = 10
 chrome_options = Options()
 chrome_options.add_argument('--headless')  # Comment this out if you want to see the browser interaction
 
+# Path to chromedriver executable
+chromedriver_path = '/usr/local/bin/chromedriver'  # Adjust this path as necessary
+
 # Path for chromedriver is '/usr/local/bin/';
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
 wait = WebDriverWait(driver, 10)
 
 driver.get('https://www.google.com/webhp?gws_rd=ssl')
