@@ -16,9 +16,9 @@ chromedriver_path = '/usr/local/bin'  # Adjust this path as necessary
 
 # Use Chrome Service object to initialize WebDriver
 service = Service(chromedriver_path)
-service.start()
 
 try:
+    service.start()
     driver = webdriver.Chrome(service=service, options=chrome_options)
     wait = WebDriverWait(driver, 10)
 
@@ -33,5 +33,7 @@ try:
     time.sleep(5)  # Let the user actually see something!
 
 finally:
-    driver.quit()
-    service.stop()
+    if 'driver' in locals():
+        driver.quit()
+    if 'service' in locals():
+        service.stop()
