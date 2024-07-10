@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
 # Set up options for headless browsing
@@ -8,8 +9,11 @@ chrome_options.add_argument("--headless")  # Comment this out to run in regular 
 # Path to chromedriver executable
 chromedriver_path = '/usr/local/bin'  # Replace with your path
 
+# Initialize the Service object
+service = Service(chromedriver_path)
+
 # Initialize the WebDriver instance
-driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Example usage: Open a website and print its title
 url = 'https://example.com'
