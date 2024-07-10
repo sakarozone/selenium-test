@@ -16,10 +16,12 @@ chromedriver_path = '/usr/local/bin'  # Adjust this path as necessary
 
 # Use Chrome Service object to initialize WebDriver
 service = Service(chromedriver_path)
-driver = webdriver.Chrome(service=service, options=chrome_options)
-wait = WebDriverWait(driver, 10)
+service.start()
 
 try:
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    wait = WebDriverWait(driver, 10)
+
     driver.get('https://www.google.com/webhp?gws_rd=ssl')
 
     search_box = wait.until(EC.presence_of_element_located((By.NAME, 'q')))
@@ -32,3 +34,4 @@ try:
 
 finally:
     driver.quit()
+    service.stop()
