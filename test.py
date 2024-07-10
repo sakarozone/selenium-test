@@ -1,12 +1,11 @@
+# pip install webdriver-manager
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
-chromedriver_path = '/usr/local/bin'  
-
-driver = webdriver.Chrome(chromedriver_path)
-
-url = 'https://example.com'
-driver.get(url)
-print("Title of the page is:", driver.title)
-
-# Close the browser
-driver.quit()
+s=Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=s)
+driver.maximize_window()
+driver.get('https://www.google.com')
+driver.find_element(By.NAME, 'q').send_keys('Yasser Khalil')
