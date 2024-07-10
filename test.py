@@ -12,7 +12,7 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')  # Comment this out if you want to see the browser interaction
 
 # Path to chromedriver executable
-chromedriver_path = '/usr/local/bin/chromedriver'  # Adjust this path as necessary
+chromedriver_path = '/usr/local/bin'  # Adjust this path as necessary
 
 # Use Chrome Service object to initialize WebDriver
 service = Service(chromedriver_path)
