@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
-
-# Default wait time
-defaultWait = 10
 
 # Set Chrome options for headless operation
 chrome_options = Options()
@@ -16,18 +14,21 @@ chrome_options.add_argument('--headless')  # Comment this out if you want to see
 # Path to chromedriver executable
 chromedriver_path = '/usr/local/bin/chromedriver'  # Adjust this path as necessary
 
-# Path for chromedriver is '/usr/local/bin/';
-driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
+# Use Chrome Service object to initialize WebDriver
+service = Service(chromedriver_path)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 wait = WebDriverWait(driver, 10)
 
-driver.get('https://www.google.com/webhp?gws_rd=ssl')
+try:
+    driver.get('https://www.google.com/webhp?gws_rd=ssl')
 
-search_box = wait.until(expected_conditions.presence_of_element_located((By.NAME, 'q')))
-print(search_box)
+    search_box = wait.until(EC.presence_of_element_located((By.NAME, 'q')))
+    print(search_box)
 
-search_box.send_keys('Saju Sasidharan')
-search_box.submit()
+    search_box.send_keys('Saju Sasidharan')
+    search_box.submit()
 
-time.sleep(5)  # Let the user actually see something!
+    time.sleep(5)  # Let the user actually see something!
 
-driver.quit()
+finally:
+    driver.quit()
